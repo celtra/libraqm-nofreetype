@@ -1,3 +1,5 @@
+This fork doesn't need FreeType which was needed for a minmal WASM/JS build.
+
 Raqm
 ====
 
@@ -21,7 +23,6 @@ Building
 --------
 
 Raqm depends on the following libraries:
-* [FreeType][3]
 * [HarfBuzz][2]
 * [FriBiDi][1]
 

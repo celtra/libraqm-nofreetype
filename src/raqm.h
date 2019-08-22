@@ -32,8 +32,6 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include <ft2build.h>
-#include FT_FREETYPE_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -78,7 +76,7 @@ typedef enum
  * @x_offset: the horizontal movement of the glyph from the current point.
  * @y_offset: the vertical movement of the glyph from the current point.
  * @cluster: the index of original character in input text.
- * @ftface: the @FT_Face of the glyph.
+ * @font: the @hb_font_t of the glyph.
  *
  * The structure that holds information about output glyphs, returned from
  * raqm_get_glyphs().
@@ -90,7 +88,7 @@ typedef struct raqm_glyph_t {
     int x_offset;
     int y_offset;
     uint32_t cluster;
-    FT_Face ftface;
+    hb_font_t *font;
 } raqm_glyph_t;
 
 raqm_t *
@@ -128,18 +126,14 @@ raqm_add_font_feature  (raqm_t     *rq,
                         int         len);
 
 bool
-raqm_set_freetype_face (raqm_t *rq,
-                        FT_Face face);
+raqm_set_harfbuzz_font (raqm_t    *rq,
+                        hb_font_t *font);
 
 bool
-raqm_set_freetype_face_range (raqm_t *rq,
-                              FT_Face face,
-                              size_t  start,
-                              size_t  len);
-
-bool
-raqm_set_freetype_load_flags (raqm_t *rq,
-                              int flags);
+raqm_set_harfbuzz_font_range (raqm_t    *rq,
+                              hb_font_t *font,
+                              size_t     start,
+                              size_t     len);
 
 bool
 raqm_set_invisible_glyph (raqm_t *rq,
