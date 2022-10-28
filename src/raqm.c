@@ -1156,7 +1156,7 @@ _raqm_itemize (raqm_t *rq)
     {
       run->pos = runs[i].pos + runs[i].len - 1;
       run->script = rq->text_info[run->pos].script;
-      run->font = rq->text_info[run->pos].font;
+      run->font = hb_font_reference(rq->text_info[run->pos].font);
       for (int j = runs[i].len - 1; j >= 0; j--)
       {
         _raqm_text_info info = rq->text_info[runs[i].pos + j];
@@ -1172,7 +1172,7 @@ _raqm_itemize (raqm_t *rq)
           newrun->len = 1;
           newrun->direction = _raqm_hb_dir (rq, runs[i].level);
           newrun->script = info.script;
-          newrun->font = info.font;
+          newrun->font = hb_font_reference(info.font);
           run->next = newrun;
           run = newrun;
         }
@@ -1187,7 +1187,7 @@ _raqm_itemize (raqm_t *rq)
     {
       run->pos = runs[i].pos;
       run->script = rq->text_info[run->pos].script;
-      run->font = rq->text_info[run->pos].font;
+      run->font = hb_font_reference(rq->text_info[run->pos].font);
       for (size_t j = 0; j < runs[i].len; j++)
       {
         _raqm_text_info info = rq->text_info[runs[i].pos + j];
@@ -1203,7 +1203,7 @@ _raqm_itemize (raqm_t *rq)
           newrun->len = 1;
           newrun->direction = _raqm_hb_dir (rq, runs[i].level);
           newrun->script = info.script;
-          newrun->font = info.font;
+          newrun->font = hb_font_reference(info.font);
           run->next = newrun;
           run = newrun;
         }
